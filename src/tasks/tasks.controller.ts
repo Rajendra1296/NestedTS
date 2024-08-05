@@ -26,10 +26,17 @@ export class TasksController {
   DeleteTaskById(@Param('id') id: string) {
     return this.tasksService.DeleteTaskById(id);
   }
-  @Patch('/:id')
+  // @Patch('/:id')
+  // UpdateTaskById(
+  //   @Param('id') id: string,
+  //   @Body('status') status: TaskStatus,
+  // ): Task {
+  //   return this.tasksService.UpdateTaskById(id, status);
+  // }
+  @Patch('/:id/:status')
   UpdateTaskById(
     @Param('id') id: string,
-    @Body('status') status: TaskStatus,
+    @Param('status') status: TaskStatus,
   ): Task {
     return this.tasksService.UpdateTaskById(id, status);
   }
