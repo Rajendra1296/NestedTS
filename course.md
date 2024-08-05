@@ -8,7 +8,7 @@ nest
 
 
 ## Classes VS Interfaces for DTOS
-Data Transfer Objects (DTOs) can be defined as classes or interfaces. 
+Data Transfer Objects (DTOs) can be defined as classes or interfaces.  
 The recommended approach is to use classes, also clearly documented in the NestS documentation.
 The reason is that interfaces are a part of TypeScript and therefore are not preserved post-compilation.
 Classes allow us to do more, and since they are a part of JavaScript, they will be preserved post-compilation.
