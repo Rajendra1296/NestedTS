@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
-import { TaskNESTS } from './task.entity';
+import { TaskData } from './task.entity';
 
 @Injectable()
-export class TaskRepository extends Repository<TaskNESTS> {
+export class TaskRepository extends Repository<TaskData> {
   constructor(private dataSource: DataSource) {
-    super(TaskNESTS, dataSource.createEntityManager());
+    super(TaskData, dataSource.createEntityManager());
   }
 
   //   async getById(id: string) {

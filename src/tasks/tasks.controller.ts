@@ -12,7 +12,7 @@
 // } from '@nestjs/common';
 import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
 import { TasksService } from './tasks.service';
-import { TaskNESTS } from './task.entity';
+import { TaskData } from './task.entity';
 // import { Task, TaskStatus } from './task.model';
 // import { CreateTaskDto } from './dto/create-task.dto';
 // import { GetTasksFilterDto } from './dto/gte_tasks_filter.dto';
@@ -67,7 +67,7 @@ export class TasksController {
   //   // console. log('description', description);
   // }
   @Get('/:id')
-  async getTaskById(@Param('id') id: string): Promise<TaskNESTS> {
+  async getTaskById(@Param('id') id: string): Promise<TaskData> {
     try {
       return await this.tasksService.getTaskById(id);
     } catch (error) {
