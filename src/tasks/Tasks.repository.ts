@@ -8,7 +8,7 @@ export class TaskRepository extends Repository<TaskNESTS> {
     super(TaskNESTS, dataSource.createEntityManager());
   }
 
-  async getById(id: string) {
-    return this.findOne({ where: { id } });
-  }
+  //   async getById(id: string) {
+  //     return this.findOne({ where: { id } });
+  //   }
 }

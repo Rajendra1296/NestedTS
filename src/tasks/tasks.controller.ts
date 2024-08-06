@@ -10,8 +10,9 @@
 //   UsePipes,
 //   ValidationPipe,
 // } from '@nestjs/common';
-import { Controller } from '@nestjs/common';
+import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
 import { TasksService } from './tasks.service';
+import { TaskNESTS } from './task.entity';
 // import { Task, TaskStatus } from './task.model';
 // import { CreateTaskDto } from './dto/create-task.dto';
 // import { GetTasksFilterDto } from './dto/gte_tasks_filter.dto';
@@ -65,4 +66,12 @@ export class TasksController {
   //   // console.log('title', title);
   //   // console. log('description', description);
   // }
+  @Get('/:id')
+  async getTaskById(@Param('id') id: string): Promise<TaskNESTS> {
+    try {
+      return await this.tasksService.getTaskById(id);
+    } catch (error) {
+      throw new NotFoundException(`Task with ID "${id}" not found`);
+    }
+  }
 }

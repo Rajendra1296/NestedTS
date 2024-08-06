@@ -7,13 +7,13 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { TaskNESTS } from './task.entity';
 import { Repository } from 'typeorm';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class TasksService {
   constructor(
     @InjectRepository(TaskNESTS)
-    private readonly taskRepository: Repository<TaskNESTS>, // Ensure correct injection
+    private taskRepository: Repository<TaskNESTS>, // Ensure correct injection
   ) {}
 
   // async getTaskById(id: string): Promise<TaskEntity> {
@@ -33,6 +33,18 @@ export class TasksService {
   // getALlTAasks(): Task[] {
   //   return this.tasks;
   // }
+
+  async getTaskById(id: string): Promise<TaskNESTS> {
+    const found = await this.taskRepository.findOne({
+      where: { id },
+    });
+
+    if (found) {
+      return found;
+    } else {
+      throw new NotFoundException(`Task with ID "${id}" not found`);
+    }
+  }
   // getTaskById(id: string): Task {
   //   const data = this.tasks.find((task) => task.id === id);
   //   if (data) {
