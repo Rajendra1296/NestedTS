@@ -5,6 +5,7 @@ import { TasksModule } from './tasks/tasks.module';
 import { TasksController } from './tasks/tasks.controller';
 import { TasksService } from './tasks/tasks.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { TaskNESTS } from './tasks/task.entity';
 @Module({
   imports: [
     TasksModule,
@@ -17,6 +18,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       database: 'task-management',
       autoLoadEntities: true,
       synchronize: true,
+      entities: [TaskNESTS],
     }),
   ],
   controllers: [AppController, TasksController],
