@@ -10,9 +10,19 @@
 //   UsePipes,
 //   ValidationPipe,
 // } from '@nestjs/common';
-import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  NotFoundException,
+  Param,
+  Post,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { TaskData } from './task.entity';
+import { CreateTaskDto } from './dto/create-task.dto';
 // import { Task, TaskStatus } from './task.model';
 // import { CreateTaskDto } from './dto/create-task.dto';
 // import { GetTasksFilterDto } from './dto/gte_tasks_filter.dto';
@@ -73,5 +83,10 @@ export class TasksController {
     } catch (error) {
       throw new NotFoundException(`Task with ID "${id}" not found`);
     }
+  }
+  @Post()
+  @UsePipes(ValidationPipe)
+  createTask(@Body() createTaskDto: CreateTaskDto): Promise<TaskData> {
+    return this.tasksService.createTask(createTaskDto);
   }
 }
