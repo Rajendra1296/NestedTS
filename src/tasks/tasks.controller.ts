@@ -13,6 +13,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   NotFoundException,
   Param,
@@ -47,10 +48,10 @@ export class TasksController {
   // getTAskById(@Param('id') id: string): Task {
   //   return this.tasksService.getTaskById(id);
   // }
-  // @Delete('/:id')
-  // DeleteTaskById(@Param('id') id: string) {
-  //   return this.tasksService.DeleteTaskById(id);
-  // }
+  @Delete('/:id')
+  DeleteTaskById(@Param('id') id: string) {
+    return this.tasksService.DeleteTaskById(id);
+  }
   // // @Patch('/:id')
   // // UpdateTaskById(
   // //   @Param('id') id: string,

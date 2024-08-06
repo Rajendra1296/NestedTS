@@ -20,6 +20,10 @@ export class TaskRepository extends Repository<TaskData> {
     await this.save(task);
     return task;
   }
+  async DeleteTaskById(id: string): Promise<void> {
+    // this.TaskData = this.tasks.filter((task) => task.id !== id);
+    await this.delete(id);
+  }
   //   async getById(id: string) {
   //     return this.findOne({ where: { id } });
   //   }
