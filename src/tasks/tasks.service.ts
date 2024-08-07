@@ -11,9 +11,11 @@ import { Injectable } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { TaskRepository } from './Tasks.repository';
 import { TaskStatus } from './task.model';
+import { GetTasksFilterDto } from './dto/gte_tasks_filter.dto';
 
 @Injectable()
 export class TasksService {
+  createQueryBuilder: any;
   constructor(
     private taskRepository: TaskRepository, // Ensure correct injection
   ) {}
@@ -96,4 +98,7 @@ export class TasksService {
   //   }
   //   return tasks;
   // }
+  async GetTasks(filterDto: GetTasksFilterDto): Promise<TaskData[]> {
+    return this.taskRepository.GetTasks(filterDto);
+  }
 }

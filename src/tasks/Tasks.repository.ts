@@ -3,6 +3,7 @@ import { DataSource, Repository } from 'typeorm';
 import { TaskData } from './task.entity';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { TaskStatus } from './task.model';
+import { GetTasksFilterDto } from './dto/gte_tasks_filter.dto';
 
 @Injectable()
 export class TaskRepository extends Repository<TaskData> {
@@ -40,5 +41,10 @@ export class TaskRepository extends Repository<TaskData> {
     } else {
       throw new NotFoundException(`Task with ID "${id}" not found`);
     }
+  }
+  async GetTasks(filterDto: GetTasksFilterDto): Promise<TaskData[]> {
+    const query = this.createQueryBuilder('TaskData');
+    const tasks = await query.getMany();
+    return tasks;
   }
 }
