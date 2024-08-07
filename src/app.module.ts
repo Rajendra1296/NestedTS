@@ -8,6 +8,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TaskData } from './tasks/task.entity';
 import { TaskRepository } from './tasks/Tasks.repository';
 import { AuthModule } from './auth/auth.module';
+import { UserRepository } from './auth/users.repository';
 @Module({
   imports: [
     TasksModule,
@@ -25,6 +26,6 @@ import { AuthModule } from './auth/auth.module';
     AuthModule,
   ],
   controllers: [AppController, TasksController],
-  providers: [AppService, TasksService, TaskRepository],
+  providers: [AppService, TasksService, TaskRepository, UserRepository],
 })
 export class AppModule {}
