@@ -17,6 +17,7 @@ import {
   Get,
   NotFoundException,
   Param,
+  Patch,
   Post,
   UsePipes,
   ValidationPipe,
@@ -24,6 +25,7 @@ import {
 import { TasksService } from './tasks.service';
 import { TaskData } from './task.entity';
 import { CreateTaskDto } from './dto/create-task.dto';
+import { TaskStatus } from './task.model';
 // import { Task, TaskStatus } from './task.model';
 // import { CreateTaskDto } from './dto/create-task.dto';
 // import { GetTasksFilterDto } from './dto/gte_tasks_filter.dto';
@@ -52,20 +54,20 @@ export class TasksController {
   DeleteTaskById(@Param('id') id: string) {
     return this.tasksService.DeleteTaskById(id);
   }
-  // // @Patch('/:id')
-  // // UpdateTaskById(
-  // //   @Param('id') id: string,
-  // //   @Body('status') status: TaskStatus,
-  // // ): Task {
-  // //   return this.tasksService.UpdateTaskById(id, status);
-  // // }
-  // @Patch('/:id/:status')
+  // @Patch('/:id')
   // UpdateTaskById(
   //   @Param('id') id: string,
-  //   @Param('status') status: TaskStatus,
+  //   @Body('status') status: TaskStatus,
   // ): Task {
   //   return this.tasksService.UpdateTaskById(id, status);
   // }
+  @Patch('/:id/:status')
+  UpdateTaskById(
+    @Param('id') id: string,
+    @Param('status') status: TaskStatus,
+  ): Promise<TaskData> {
+    return this.tasksService.UpdateTaskById(id, status);
+  }
   // @Post()
   // @UsePipes(ValidationPipe)
   // createTask(

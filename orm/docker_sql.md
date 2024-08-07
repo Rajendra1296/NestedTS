@@ -43,7 +43,7 @@ add this to app module
     }),
 
 ],
-
+});
 
 What is the Active Record pattern?
 In TypeORM you can use both the Active Record and the Data Mapper patterns.
