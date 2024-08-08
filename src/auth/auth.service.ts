@@ -11,10 +11,10 @@ export class AuthService {
   }
   async signIn(authCredentialDto: AuthCredentialsDto): Promise<string> {
     const { username, password } = authCredentialDto;
-    const userExists = await this.userRepository.findOne({
+    const user = await this.userRepository.findOne({
       where: { username },
     });
-    if (userExists && (await bcrypt.compare(password, userExists.password))) {
+    if (user && (await bcrypt.compare(password, user.password))) {
       return 'success';
     } else {
       throw new UnauthorizedException('please check your login credentials');
