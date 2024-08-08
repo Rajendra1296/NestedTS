@@ -12,6 +12,7 @@ import { CreateTaskDto } from './dto/create-task.dto';
 import { TaskRepository } from './Tasks.repository';
 import { TaskStatus } from './task.model';
 import { GetTasksFilterDto } from './dto/gte_tasks_filter.dto';
+import { user } from 'src/auth/user.entity';
 
 @Injectable()
 export class TasksService {
@@ -65,8 +66,11 @@ export class TasksService {
   //   task.status = status;
   //   return task;
   // }
-  async createTask(createTaskDto: CreateTaskDto): Promise<TaskData> {
-    return this.taskRepository.createTask(createTaskDto);
+  async createTask(
+    createTaskDto: CreateTaskDto,
+    User: user,
+  ): Promise<TaskData> {
+    return this.taskRepository.createTask(createTaskDto, User);
   }
 
   // createTask(createTaskDto: CreateTaskDto): Task {
