@@ -102,7 +102,10 @@ export class TasksService {
   //   }
   //   return tasks;
   // }
-  async GetTasks(filterDto: GetTasksFilterDto): Promise<TaskData[]> {
-    return this.taskRepository.GetTasks(filterDto);
+  async GetTasks(
+    filterDto: GetTasksFilterDto,
+    User: user,
+  ): Promise<TaskData[]> {
+    return this.taskRepository.GetTasks(filterDto, User);
   }
 }

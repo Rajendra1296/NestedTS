@@ -13,6 +13,8 @@ export class TaskData {
   description: string;
   @Column()
   status: TaskStatus;
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   @ManyToOne((_type) => user, (User) => User.tasks, { eager: false })
   @Exclude({ toPlainOnly: true })
   User: user;

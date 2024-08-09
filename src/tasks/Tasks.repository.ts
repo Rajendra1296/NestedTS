@@ -47,9 +47,13 @@ export class TaskRepository extends Repository<TaskData> {
       throw new NotFoundException(`Task with ID "${id}" not found`);
     }
   }
-  async GetTasks(filterDto: GetTasksFilterDto): Promise<TaskData[]> {
+  async GetTasks(
+    filterDto: GetTasksFilterDto,
+    User: user,
+  ): Promise<TaskData[]> {
     const { status, search } = filterDto;
     const query = this.createQueryBuilder('TaskData');
+    query.where({ User });
     if (status) {
       query.andWhere('TaskData.status = :status', { status });
     }
