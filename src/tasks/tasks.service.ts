@@ -50,9 +50,9 @@ export class TasksService {
   //     throw new NotFoundException(`Any task is not found with id:${id}`);
   //   }
   // }
-  async DeleteTaskById(id: string): Promise<void> {
+  async DeleteTaskById(id: string, User: user): Promise<void> {
     // this.TaskData = this.tasks.filter((task) => task.id !== id);
-    return this.taskRepository.DeleteTaskById(id);
+    return this.taskRepository.DeleteTaskById(id, User);
   }
 
   // DeleteTaskById(id: string): void {

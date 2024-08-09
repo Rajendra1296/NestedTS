@@ -66,8 +66,8 @@ export class TasksController {
   //   return this.tasksService.getTaskById(id);
   // }
   @Delete('/:id')
-  DeleteTaskById(@Param('id') id: string) {
-    return this.tasksService.DeleteTaskById(id);
+  DeleteTaskById(@Param('id') id: string, @GetUser() User: user) {
+    return this.tasksService.DeleteTaskById(id, User);
   }
   // @Patch('/:id')
   // UpdateTaskById(

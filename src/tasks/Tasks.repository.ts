@@ -26,9 +26,12 @@ export class TaskRepository extends Repository<TaskData> {
     await this.save(task);
     return task;
   }
-  async DeleteTaskById(id: string): Promise<void> {
+  async DeleteTaskById(id: string, User: user): Promise<void> {
     // this.TaskData = this.tasks.filter((task) => task.id !== id);
-    await this.delete(id);
+    const result = await this.delete({ id, User });
+    if (result.affected === 0) {
+      throw new NotFoundException(`task not ${id} found`);
+    }
   }
   async UpdateTaskById(
     id: string,
