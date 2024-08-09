@@ -1,13 +1,15 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
 import { TaskData } from './task.entity';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { TaskStatus } from './task.model';
 import { GetTasksFilterDto } from './dto/gte_tasks_filter.dto';
 import { user } from 'src/auth/user.entity';
+import { error } from 'console';
 
 @Injectable()
 export class TaskRepository extends Repository<TaskData> {
+  private logger = new Logger(`TaskRepository`);
   constructor(private dataSource: DataSource) {
     super(TaskData, dataSource.createEntityManager());
   }
@@ -23,6 +25,7 @@ export class TaskRepository extends Repository<TaskData> {
       status: TaskStatus.OPEN,
       User,
     });
+
     await this.save(task);
     return task;
   }
@@ -70,7 +73,14 @@ export class TaskRepository extends Repository<TaskData> {
         { search: `${search}` },
       );
     }
-    const tasks = await query.getMany();
-    return tasks;
+    try {
+      const tasks = await query.getMany();
+      return tasks;
+    } catch (error) {
+      this.logger.error(
+        `Failed to get the user "${User.username}" with filters "${JSON.stringify(filterDto)}" `,
+        error.stack,
+      );
+    }
   }
 }
