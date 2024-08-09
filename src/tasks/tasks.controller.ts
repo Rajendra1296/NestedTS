@@ -80,8 +80,9 @@ export class TasksController {
   UpdateTaskById(
     @Param('id') id: string,
     @Param('status') status: TaskStatus,
+    @GetUser() User: user,
   ): Promise<TaskData> {
-    return this.tasksService.UpdateTaskById(id, status);
+    return this.tasksService.UpdateTaskById(id, status, User);
   }
   // @Post()
   // @UsePipes(ValidationPipe)
@@ -95,9 +96,12 @@ export class TasksController {
   //   // console. log('description', description);
   // }
   @Get('/:id')
-  async getTaskById(@Param('id') id: string): Promise<TaskData> {
+  async getTaskById(
+    @Param('id') id: string,
+    @GetUser() User: user,
+  ): Promise<TaskData> {
     try {
-      return await this.tasksService.getTaskById(id);
+      return await this.tasksService.getTaskById(id, User);
     } catch (error) {
       throw new NotFoundException(`Task with ID "${id}" not found`);
     }

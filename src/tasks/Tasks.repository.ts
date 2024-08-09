@@ -30,15 +30,19 @@ export class TaskRepository extends Repository<TaskData> {
     // this.TaskData = this.tasks.filter((task) => task.id !== id);
     await this.delete(id);
   }
-  async UpdateTaskById(id: string, status: TaskStatus): Promise<TaskData> {
-    const task = await this.getById(id);
+  async UpdateTaskById(
+    id: string,
+    status: TaskStatus,
+    User: user,
+  ): Promise<TaskData> {
+    const task = await this.getById(id, User);
     task.status = status;
     await this.save(task);
     return task;
   }
-  async getById(id: string) {
+  async getById(id: string, User: user) {
     const found = await this.findOne({
-      where: { id },
+      where: { id, User },
     });
 
     if (found) {
