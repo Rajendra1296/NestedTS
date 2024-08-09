@@ -59,7 +59,7 @@ export class TaskRepository extends Repository<TaskData> {
     }
     if (search) {
       query.andWhere(
-        'LOWER(TaskData.title) LIKE LOWER(:search) OR LOWER(TaskData.description) LIKE LOWER(:search)',
+        '(LOWER(TaskData.title) LIKE LOWER(:search) OR LOWER(TaskData.description) LIKE LOWER(:search))',
         { search: `${search}` },
       );
     }
