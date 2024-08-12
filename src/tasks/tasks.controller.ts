@@ -33,6 +33,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from 'src/auth/get-user.decorator';
 import { user } from 'src/auth/user.entity';
 import { Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 // import { Task, TaskStatus } from './task.model';
 // import { CreateTaskDto } from './dto/create-task.dto';
 // import { GetTasksFilterDto } from './dto/gte_tasks_filter.dto';
@@ -40,8 +41,13 @@ import { Logger } from '@nestjs/common';
 @Controller('tasks')
 @UseGuards(AuthGuard())
 export class TasksController {
-  private logger = new Logger(`Task Controller`);
-  constructor(public tasksService: TasksService) {}
+  private logger = new Logger(`TasksController`);
+  constructor(
+    public tasksService: TasksService,
+    private configService: ConfigService,
+  ) {
+    console.log(this.configService.get(`TEST_VALUE`));
+  }
   // @Get()
   // getAllTasks(): Task[] {
   //   return this.tasksService.getALlTAasks();

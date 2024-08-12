@@ -5,7 +5,6 @@ import { CreateTaskDto } from './dto/create-task.dto';
 import { TaskStatus } from './task.model';
 import { GetTasksFilterDto } from './dto/gte_tasks_filter.dto';
 import { user } from 'src/auth/user.entity';
-import { error } from 'console';
 
 @Injectable()
 export class TaskRepository extends Repository<TaskData> {

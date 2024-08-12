@@ -9,8 +9,12 @@ import { TaskData } from './tasks/task.entity';
 import { TaskRepository } from './tasks/Tasks.repository';
 import { AuthModule } from './auth/auth.module';
 import { UserRepository } from './auth/users.repository';
+import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      envFilePath: [`.env.stage.${process.env.STAGE}`],
+    }),
     TasksModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
@@ -26,6 +30,12 @@ import { UserRepository } from './auth/users.repository';
     AuthModule,
   ],
   controllers: [AppController, TasksController],
-  providers: [AppService, TasksService, TaskRepository, UserRepository],
+  providers: [
+    AppService,
+    TasksModule,
+    TasksService,
+    TaskRepository,
+    UserRepository,
+  ],
 })
 export class AppModule {}
